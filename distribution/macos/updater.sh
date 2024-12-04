@@ -12,12 +12,12 @@ error_handler() {
 
     script="""
     set alertTitle to \"Ryujinx - Updater error\"
-    set alertMessage to \"An error occurred during Ryujinx update (updater.sh:$lineno)\n\nPlease download the update manually from our website if the problem persists.\"
+    set alertMessage to \"An error occurred during Ryujinx update (updater.sh:$lineno)\n\nPlease download the update manually from our github if the problem persists.\"
     display dialog alertMessage with icon caution with title alertTitle buttons {\"Open Download Page\", \"Exit\"}
     set the button_pressed to the button returned of the result
 
     if the button_pressed is \"Open Download Page\" then
-        open location \"https://ryujinx.org/download\"
+        open location \"https://github.com/GreemDev/Ryujinx/releases\"
     end if
     """
 
