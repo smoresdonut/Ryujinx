@@ -21,7 +21,7 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   RYUJINX_BASE_VERSION: "1.2"
   RYUJINX_TARGET_RELEASE_CHANNEL_NAME: "release"
-  RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: "GreemDev"
+  RYUJINX_TARGET_RELEASE_CHANNEL_OWNER: "smoresdonut"
   RYUJINX_TARGET_RELEASE_CHANNEL_REPO: "Ryujinx"
   RELEASE: 1
 
@@ -68,6 +68,7 @@ jobs:
           - { name: win-x64,     os: windows-latest, zip_os_name: win_x64     }
           - { name: linux-x64,   os: ubuntu-latest,  zip_os_name: linux_x64   }
           - { name: linux-arm64, os: ubuntu-latest,  zip_os_name: linux_arm64 }
+          - { name: macos, os: macos-latest, zip_os_name: macos_universal }
     steps:
       - uses: actions/checkout@v4
 
@@ -186,7 +187,7 @@ jobs:
 
   macos_release:
     name: Release MacOS universal
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -241,7 +242,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: ${{ steps.version_info.outputs.build_version }}
-          artifacts: "publish/*.tar.gz, publish_headless/*.tar.gz"
+          artifacts: "publish/*.dmg, publish_headless/*.dmg"
           tag: ${{ steps.version_info.outputs.build_version }}
           body: "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${{ steps.version_info.outputs.prev_build_version }}...${{ steps.version_info.outputs.build_version }}"
           omitBodyDuringUpdate: true
